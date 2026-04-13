@@ -1,166 +1,648 @@
-/* VICTORIOUS CHRISTIANS SINGLES: "LOVE THEME" MASTERPIECE   */
-/* Built iteratively for the Discourse Air Theme Base        */
+@use "lib/viewport";
+
+/* ========================================================= */
+/* VICTORIOUS CHRISTIANS SINGLES: "LOVE THEME"              */
+/* Masterpiece SCSS Bundle (Air Theme Repo Integration)     */
 /* ========================================================= */
 
 :root {
-    /* 1. Core Palette */
-    --primary-accent: #FF4D6D;
-    --secondary-accent: #FF9E00;
-    --app-bg: #FFFDFE;
-    
-    /* 2. Air Theme Overrides */
-    --primary: #1A1A1A; /* Text main */
-    --secondary: #FFFFFF; /* Base white elements */
-    
-    /* 3. Global Shapes */
-    --d-button-border-radius: 50px;
-    --d-input-border-radius: 50px;
-    --gradient-love: linear-gradient(135deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+  /* Core Palette Injection */
+  --primary-accent: #FF4D6D;
+  --secondary-accent: #FF9E00;
+  --app-bg: #FFFDFE;
+  --gradient-love: linear-gradient(135deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
 }
 
-/* ========================================================= */
-/* PHASE 1: CORE CANVAS & AMBIENT GLOW                       */
-/* ========================================================= */
-
-html body:not(.no-ember) {
-    background: var(--app-bg) !important;
+// custom search banner customizations
+.welcome-banner.--location-above-topic-content .custom-search-banner-wrap {
+  color: var(--primary);
 }
 
-/* Redefining the Air Theme Background Ellipse */
-html .background-container {
-    background: radial-gradient(ellipse at 50% -20%, rgba(255, 77, 109, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 91% -14%, rgba(255, 158, 0, 0.15) 0%, transparent 80%) !important;
-    clip-path: none !important; /* Allow it to breathe broadly over the whole upper canvas */
-    filter: blur(80px);
-}
-
-/* ========================================================= */
-/* PHASE 2: LAYOUT "UN-SQUISHING"                            */
-/* ========================================================= */
-
-/* Expanding the main central wrapper so everything can breathe nicely */
-html body #main-outlet {
-    max-width: 1400px !important; /* Huge wide layout allowance */
-    width: 92% !important; /* Responsive width */
-    background: transparent !important; /* Remove the massive white master background */
-    box-shadow: none !important; 
-    padding: 0 !important; /* Remove the aggressive inward padding */
-    margin-top: 40px !important;
-}
-
-/* Un-Squishing the CSS Grid (Ensuring Sidebar gets what it needs) */
-.full-width .contents .topic-list.with-sidebar {
-    display: grid !important;
-    grid-template-columns: 1fr 320px !important; /* 1fr for feed, solid block for profile widget */
-    gap: 32px !important;
-}
-
-@media screen and (max-width: 950px) {
-    .full-width .contents .topic-list.with-sidebar {
-        grid-template-columns: 1fr !important; /* Stack elements naturally on mobile/tablet */
-    }
-}
-
-/* Fix default Right Sidebar Panel wrapper to be a modern card */
-.tc-right-sidebar {
-    background: rgba(255, 255, 255, 0.9) !important;
-    border-radius: 24px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
-    padding: 24px !important;
-    border: 1px solid rgba(255, 77, 109, 0.08) !important;
-}
-
-/* ========================================================= */
-/* PHASE 3: THE FLOATING TOPIC CARDS                         */
-/* ========================================================= */
-
-/* Target the native Flexbox cards implemented by Air Theme */
-.topic-list .topic-list-body .topic-list-item {
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-radius: 20px !important; /* Crisp curve */
-    border: 1px solid rgba(255, 77, 109, 0.08) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03) !important;
-    padding: 12px 10px !important; /* Injecting softer internal breathing room */
-    margin-bottom: 20px !important; /* Gap distance replacing massive borders */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-}
-
-/* Give standard lists padding to breathe inside */
-.topic-list .topic-list-header .topic-list-data, 
-.topic-list .topic-list-item .topic-list-data {
-    padding: 16px 12px !important;
-}
-
-.topic-list .topic-list-body .topic-list-item:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.1) !important;
-    border: 1px solid rgba(255, 77, 109, 0.2) !important;
-    background: #FFFFFF !important;
-}
-
-/* Ensure Avatars remain beautifully round */
-.topic-list .posters .avatar {
-    border-radius: 50% !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-/* ========================================================= */
-/* PHASE 4: THE GLASS DOCK, HEADERS & WELCOME CARD           */
-/* ========================================================= */
-
-/* Global Glass Header */
-.d-header {
-    background: rgba(255, 255, 255, 0.65) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
-}
-
-/* The Left Navigation Dock */
-.sidebar-wrapper, .d-sidebar {
-    background: rgba(255, 255, 255, 0.35) !important; 
-    backdrop-filter: blur(30px) saturate(200%) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.8) !important;
-    border-radius: 32px !important;
-    margin: 20px 0px 20px 10px !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04) !important; 
-}
-
-/* Hero Centerpiece Welcome Banner */
 .custom-search-banner-wrap {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(25px) saturate(200%) !important;
-    border-radius: 40px !important;
-    border: 1px solid rgba(255, 77, 109, 0.1) !important;
-    box-shadow: 0 15px 45px rgba(255, 77, 109, 0.08) !important;
-    padding: 50px 30px !important;
-    margin-bottom: 40px !important;
-}
+  color: var(--secondary);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 40px;
+  border: 1px solid rgba(255, 77, 109, 0.1);
+  box-shadow: 0 15px 45px rgba(255, 77, 109, 0.08);
+  padding: 50px 30px;
+  margin-bottom: 40px;
 
-/* Living Typography for H1 */
-.custom-search-banner-headline, .welcome-banner__title, h1 {
-    font-size: 3.5rem !important; 
-    font-weight: 900 !important;
-    letter-spacing: -0.04em !important;
+  .custom-search-banner-headline,
+  h1 {
+    line-height: var(--line-height-small);
+    font-size: 3.5rem; 
+    font-weight: 900;
+    letter-spacing: -0.04em;
     text-align: center;
-    background: var(--gradient-love) !important;
-    background-size: 200% auto !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    animation: livingShine 6s linear infinite !important;
+    background: var(--gradient-love);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: livingShine 6s linear infinite;
+  }
+
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    color: var(--primary); /* Force clarity on subtext */
+    text-align: center;
+  }
+
+  .btn {
+    height: 100%;
+  }
+
+  .search-menu input[type="text"] {
+    border: 1px solid rgba(255, 77, 109, 0.15);
+    border-radius: 0.25em;
+    min-height: 40px;
+    background: #FFFFFF;
+
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.01), 0 8px 25px rgba(255, 77, 109, 0.15);
+      border-color: var(--primary-accent);
+    }
+  }
+
+  .widget-link.show-help {
+    color: rgb(var(--primary-rgb), 0.75);
+    border-radius: 0.5em;
+    padding: 0.5em;
+    background-color: rgb(var(--secondary-rgb), 0.25);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  .search-menu .search-input {
+    border-color: var(--tertiary-hover);
+    outline: none;
+  }
+
+  .results {
+    top: 43px;
+    border-radius: 0.25em;
+  }
+
+  .search-context {
+    top: 3.25em;
+    right: 1em;
+  }
 }
 
 @keyframes livingShine {
     to { background-position: 200% center; }
 }
 
+.search-input {
+  border-radius: 0.25em;
+}
+
+.display-search-banner {
+  #main-outlet {
+    padding-top: 2em;
+  }
+}
+
+.above-main-container-outlet.search-banner {
+  .custom-search-banner-wrap {
+    padding: 3em 1em 4em;
+    color: var(--tertiary);
+
+    .mobile-view & {
+      color: var(--secondary);
+    }
+
+    .custom-search-banner-headline,
+    h1 {
+      margin-bottom: 0;
+    }
+
+    .search-widget {
+      margin-top: 2em;
+    }
+  }
+}
+
+// Main customizations
+.alert {
+  margin: 1em 0;
+}
+
+.topic-list .topic-list-header .topic-list-data,
+.topic-list .topic-list-item .topic-list-data {
+  padding: 16px 12px;
+}
+
+.navigation-topics .topic-list .topic-list-body .topic-list-data,
+.navigation-topics .topic-list .topic-list-header .topic-list-data {
+  flex: unset;
+}
+
+.badge-wrapper.box {
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+
+.badge-wrapper.bullet {
+  .badge-category-bg {
+    border-radius: 0.125em;
+  }
+
+  .badge-category-parent-bg {
+    border-top-left-radius: 0.125em;
+    border-bottom-left-radius: 0.125em;
+
+    + .badge-category-bg {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 0.125em;
+      border-bottom-right-radius: 0.125em;
+    }
+  }
+}
+
+.discourse-tags {
+  gap: 0.5em;
+}
+
+.discourse-tag {
+  font-size: $font-down-1;
+  border-radius: 0.25em;
+  padding: 0.15em 0.25em 0.15em 0.35em;
+  background-color: var(--primary-low);
+  color: var(--primary) !important;
+
+  &:hover {
+    background-color: var(--primary-low-mid);
+    color: var(--primary);
+  }
+}
+
+.discourse-tags .discourse-tag.simple:not(:last-child)::after,
+.list-tags .discourse-tag.simple:not(:last-child)::after,
+.search-category .discourse-tag.simple:not(:last-child)::after {
+  content: "";
+  margin-left: unset;
+}
+
+.topic-list .link-bottom-line .discourse-tag.simple::after,
+.topic-list .link-bottom-line .discourse-tag.box {
+  margin-right: 0;
+}
+
+#site-text-logo {
+  color: var(--primary);
+}
+
+.mobile-view {
+  .cm-header-links {
+    display: none;
+  }
+
+  .list-controls .nav-pills .drop li:first-of-type {
+    display: none;
+  }
+}
+
+.not-found-container {
+  background-color: var(--secondary);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.select-kit.combo-box .select-kit-header,
+.d-editor-textarea-wrapper,
+div.ac-wrap {
+  border-radius: 4px;
+}
+
+/* Glass Header Swap */
+.d-header {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.d-header-icons .d-icon {
+  border-radius: 100px;
+}
+
+.d-header-icons .icon {
+  border-radius: 0.25em;
+  margin-left: 0.3em;
+  border: 1px solid transparent;
+
+  svg {
+    font-size: 1.25em;
+  }
+}
+
+.d-header-icons .icon img.avatar {
+  border-radius: 0.25em;
+}
+
+.menu-panel.drop-down {
+  margin-top: 1em;
+  border-radius: 0.5em;
+  border: 1px solid var(--primary-low-mid);
+}
+
+.drop-down-mode .d-header-icons .active .icon {
+  border: 1px solid transparent;
+
+  .d-icon {
+    color: var(--primary-accent);
+  }
+}
+
+.drop-down-mode .d-header-icons .active .icon:hover {
+  border: 1px solid transparent;
+}
+
+.unread-high-priority-notifications {
+  background: var(--quaternary);
+}
+
+.timeline-container .topic-timeline .timeline-handle {
+  background-color: var(--primary-accent);
+}
+
+.timeline-container .topic-timeline .timeline-scrollarea {
+  border-left-color: var(--primary-accent);
+}
+
+html {
+  body:not(.no-ember) {
+    background: var(--app-bg) !important;
+  }
+
+  /* Core Canvas & Ambient Glow Override */
+  .background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: radial-gradient(ellipse at 50% -20%, rgba(255, 77, 109, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 91% -14%, rgba(255, 158, 0, 0.15) 0%, transparent 80%) !important;
+    filter: blur(80px);
+  }
+
+  body.no-ember .background-container {
+    display: none;
+  }
+}
+
+/* Expanded Layout for Unsquishing */
+html body #main-outlet {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  background: transparent; /* Expanded over white card */
+  padding: 0; /* Unsquish */
+  max-width: 1400px; /* Huge wide allowance */
+  width: 92%;
+  padding-bottom: 5% !important;
+
+  @media screen and (width <= 700px) {
+    padding: 1.5em;
+    margin-top: 0;
+  }
+
+  @media screen and (width <= 1120px) {
+    width: 95%;
+  }
+
+  .archetype-regular & {
+    min-height: 500px;
+  }
+}
+
+.nav-pills:not(.user-nav) > li a.active,
+.nav-pills:not(.user-nav) > li > a {
+  border-radius: 50px;
+}
+
+.category-calendar {
+  &.before-topic-list-body-outlet {
+    display: block;
+  }
+  background: var(--secondary);
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.discourse-post-event-upcoming-events {
+  background: var(--secondary);
+  border-radius: 8px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+// Topic List
+.full-width .contents .topic-list {
+  border-collapse: separate;
+  border-spacing: 0 0.25em;
+  display: contents;
+
+  /* CSS Grid Unsquish Injection */
+  &.with-sidebar {
+      display: grid !important;
+      grid-template-columns: 1fr 340px !important;
+      gap: 32px !important;
+
+      @media screen and (max-width: 950px) {
+          grid-template-columns: 1fr !important;
+      }
+  }
+
+  .topic-list-header {
+    tr {
+      display: flex;
+      border-bottom: none;
+    }
+    display: contents;
+
+    .topic-list-data.default {
+      width: 63%;
+    }
+
+    .topic-list-data.posters {
+      width: 7%;
+    }
+
+    .topic-list-data.posts {
+      width: 15%;
+    }
+
+    .topic-list-data.activity {
+      width: 15%;
+    }
+  }
+
+  .topic-list-body {
+    display: contents;
+
+    .topic-list-item-separator {
+      width: 100%;
+      margin: 0.75em 0;
+      display: flex;
+
+      .topic-list-data {
+        width: 100%;
+      }
+    }
+
+    /* Floating Topic Card Native Stylings */
+    .topic-list-item {
+      display: flex;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 77, 109, 0.08);
+      border-radius: 20px;
+      padding: 12px 10px;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+
+      &.visited {
+        .discourse-tag {
+          opacity: 0.75;
+        }
+
+        &:hover {
+          .discourse-tag {
+            opacity: 1;
+          }
+        }
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        background-color: #FFFFFF;
+        box-shadow: 0 15px 35px rgba(255, 77, 109, 0.1);
+        border: 1px solid rgba(255, 77, 109, 0.2);
+
+        a.title:not(.badge-notification),
+        a.topic-excerpt {
+          color: var(--primary-accent) !important;
+        }
+      }
+
+      .topic-list-data.main-link {
+        width: 63%;
+        order: 2;
+      }
+
+      .topic-list-data.posters {
+        width: 7%;
+        order: 1;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a:not(.latest) {
+          display: none;
+        }
+      }
+
+      .topic-list-data.posts {
+        width: 15%;
+        order: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .topic-list-data.age {
+        width: 15%;
+        order: 4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &.selected {
+        td:nth-of-type(1) {
+          box-shadow: none;
+        }
+
+        &:focus-visible td:nth-of-type(2) {
+          box-shadow: inset 3px 0 0 var(--primary-accent);
+          border-radius: calc(1em - 3px);
+        }
+      }
+    }
+
+    .main-link {
+      min-height: 100%;
+
+      .link-top-line {
+        display: block;
+        margin-bottom: 0.25em;
+      }
+
+      .title {
+        font-weight: bold;
+      }
+
+      .link-area {
+        display: flex;
+
+        .link-title-area {
+          margin-right: 1em;
+          font-size: $font-up-1;
+        }
+
+        .link-meta-area {
+          font-size: $font-down-3;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .posters {
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+
+      a.latest {
+        margin-right: 4px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        .avatar {
+          margin-right: 0;
+        }
+      }
+
+      a:not(.latest) {
+        margin-left: -22px;
+
+        .avatar {
+          border: 3px solid var(--secondary);
+        }
+      }
+    }
+
+    .posts-map,
+    .num.age.activity {
+      a {
+        padding: 0;
+      }
+    }
+
+    .posts-map {
+      position: relative;
+
+      .number {
+        margin-right: 0.25em;
+      }
+    }
+
+    .post-activity {
+      .d-icon-reply {
+        color: var(--primary-accent);
+        margin-right: 0.25em;
+      }
+
+      .relative-date {
+        color: var(--primary-accent);
+      }
+    }
+  }
+}
+
+.topic-list-data.num.views {
+  display: none;
+}
+
+// published page additions
+.published-page-content-wrapper {
+  max-width: 1000px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  background: var(--secondary);
+  border-radius: 1em;
+  padding: 3em 3em 5%;
+  box-shadow:
+    0 24px 40px rgb(0, 0, 0, 0.07),
+    0 10.8529px 24.1177px rgb(0, 0, 0, 0.0456112),
+    0 4.50776px 10.0172px rgb(0, 0, 0, 0.035),
+    0 1.63037px 3.62304px rgb(0, 0, 0, 0.0243888);
+  z-index: 1;
+  position: relative;
+}
+
+.published-page {
+  .background-container {
+    display: none;
+  }
+
+  &::before {
+    background: linear-gradient(
+      90deg,
+      var(--primary-accent) 0%,
+      var(--secondary-accent) 100%
+    );
+    clip-path: ellipse(148% 70% at 91% -14%);
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: fixed;
+    z-index: 0;
+  }
+}
+
+.quote-button {
+  border-radius: 0.5em;
+}
+
+.topic-list .main-link.focused + .posters {
+  box-shadow: inset 3px 0 0 var(--primary-accent);
+}
+
+.topic-list .main-link.focused {
+  box-shadow: none;
+}
+
+.title-voting {
+  padding-left: 14px;
+}
+
 /* ========================================================= */
-/* PHASE 5: THE MAGIC BULLETS                                */
-/* Buttons, Navigation, & Discourse AI Integrity             */
+/* THE MAGIC BULLETS - Unified Button & AI Fixes             */
 /* ========================================================= */
 
 .btn-primary, .btn-primary:hover, .btn-danger, .btn-danger:hover,
@@ -171,14 +653,14 @@ html body #main-outlet {
     box-shadow: 0 8px 25px rgba(255, 77, 109, 0.25) !important;
 }
 
-/* Force pure white text across all primary components */
+/* White text forcing */
 .btn-primary, .btn-primary *, .btn-danger, .btn-danger *, #create-topic, #create-topic *, 
 .topic-admin-menu-button *, .post-action-menu__delete * {
     color: #FFFFFF !important;
     fill: #FFFFFF !important;
 }
 
-/* Navigation Pills */
+/* Active Nav Pills */
 .nav-pills > li.active > a, .nav-pills > li > a.active {
     background: var(--gradient-love) !important;
     border: none !important;
@@ -191,7 +673,7 @@ html body #main-outlet {
     fill: #FFFFFF !important;
 }
 
-/* Tame Sidebar Active States */
+/* Active Sidebar Navigation Hooks */
 .sidebar-section-link-wrapper .sidebar-section-link.active {
     background: var(--gradient-love) !important;
     color: #FFFFFF !important;
@@ -203,7 +685,16 @@ html body #main-outlet {
     color: #FFFFFF !important;
 }
 
-/* Discourse AI "Pop" Bug Fix & Flashing Blue Dot */
+/* Right Sidebar Injection Card Setup */
+.tc-right-sidebar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+    padding: 24px !important;
+    border: 1px solid rgba(255, 77, 109, 0.08) !important;
+}
+
+/* Discourse AI Collapse Bug Override */
 .topic-post .topic-body .cooked details.ai-thinking {
     display: block !important;
     min-height: 35px !important;
